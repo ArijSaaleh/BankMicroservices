@@ -33,7 +33,6 @@ public class AgencyController {
     @DeleteMapping("/delete/{id}")
     public void deleteAgency(@PathVariable("id") long id) {
         agencyService.delete(id);
-
     }
     @PutMapping("/edit/{id}")
     public Agency editAgency(@RequestBody Agency ag) {
