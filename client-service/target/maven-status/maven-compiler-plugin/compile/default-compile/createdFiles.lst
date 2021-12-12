@@ -1,0 +1,5 @@
+eg\client\ClientApplication.class
+eg\client\entity\Client.class
+eg\client\service\ClientService.class
+eg\client\controller\ClientController.class
+eg\client\repository\ClientRepo.class
