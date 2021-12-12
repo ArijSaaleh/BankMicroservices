@@ -15,23 +15,26 @@ public class Client implements Serializable {
     private String adr_client;
     private int phone;
     private String num_compte;
+    private int agencyId;
 
     public Client() {
     }
 
-    public Client(Long id, String nom_client, String adr_client, int phone, String num_compte) {
+    public Client(Long id, String nom_client, String adr_client, int phone, String num_compte, int agencyId) {
         this.id = id;
         this.nom_client = nom_client;
         this.adr_client = adr_client;
         this.phone = phone;
         this.num_compte = num_compte;
+        this.agencyId = agencyId;
     }
 
-    public Client(String nom_client, String adr_client, int phone, String num_compte) {
+    public Client(String nom_client, String adr_client, int phone, String num_compte, int agencyId) {
         this.nom_client = nom_client;
         this.adr_client = adr_client;
         this.phone = phone;
         this.num_compte = num_compte;
+        this.agencyId = agencyId;
     }
 
     public Long getId() {
@@ -74,5 +77,11 @@ public class Client implements Serializable {
         this.num_compte = num_compte;
     }
 
+    public int getAgencyId() {
+        return agencyId;
+    }
 
+    public void setAgencyId(int agencyId) {
+        this.agencyId = agencyId;
+    }
 }

@@ -3,15 +3,22 @@ package eg.client.service;
 
 import eg.client.entity.Client;
 import eg.client.repository.ClientRepo;
+import eg.client.valueObject.Agency;
+import eg.client.valueObject.ResponseTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class ClientService {
     @Autowired
     private ClientRepo clientRepo;
+
+    @Autowired
+    private RestTemplate restTemplate;
 
     public List<Client> listAll() {
         return clientRepo.findAll();
@@ -27,5 +34,16 @@ public class ClientService {
 
     public Client updateClient(Client client) {
         return this.clientRepo.save(client);
+    }
+
+    public ResponseTemplate getClientwithAgencyId(int AgencyId) {
+        ResponseTemplate vo = new ResponseTemplate();
+        List<Agency> agencyList = new ArrayList<>();
+        List<Client> clientList = clientRepo.findByagencyId(AgencyId);
+        Agency agency = restTemplate.getForObject("http://localhost:8762/serviceAgency/agency/" + AgencyId, Agency.class);
+        agencyList.add(agency);
+        vo.setClient(clientList);
+        vo.setAgency(agencyList);
+        return vo;
     }
 }

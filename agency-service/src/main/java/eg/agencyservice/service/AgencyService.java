@@ -13,15 +13,21 @@ public class AgencyService {
     private AgencyRepo agencyRepo;
 
     public List<Agency> listAll() {
-        return (List<Agency>)agencyRepo.findAll();
+        return (List<Agency>) agencyRepo.findAll();
     }
+
     public Agency addAgence(Agency agence) {
         return this.agencyRepo.save(agence);
+    }
+
+    public Agency getAgencyById(Long idAgency) {
+        return this.agencyRepo.findById(idAgency).get();
     }
 
     public void delete(long id) {
         agencyRepo.deleteById(id);
     }
+
     public Agency updateAgence(Agency ag) {
         return this.agencyRepo.save(ag);
     }
