@@ -19,10 +19,17 @@ public class ClientController {
         List<Client> listclient = clientService.listAll();
         return clientService.listAll();
     }
+
     @PostMapping("/addClient")
     @ResponseBody
     public Client addAg(@RequestBody Client client) {
         return clientService.addClient(client);
+    }
+
+    @GetMapping("/client/{id}")
+    @ResponseBody
+    public Client showOneClient(@PathVariable("id") long id) {
+        return clientService.getClientById(id);
     }
 
     @DeleteMapping("/delete/{id}")
@@ -35,9 +42,13 @@ public class ClientController {
         return clientService.updateClient(client);
     }
 
-    @GetMapping("/AgencyClient/{id}")
-    public ResponseTemplate getClientwithAgency(@PathVariable("id") int AgenceId) {
+    @GetMapping("/AgencyClients/{id}")
+    public ResponseTemplate getAgencyClients(@PathVariable("id") int AgenceId) {
         return clientService.getClientwithAgencyId(AgenceId);
     }
 
+    @GetMapping("/getClients/{id}")
+    public ResponseTemplate getClientswithAgency(@PathVariable("id") int AgenceId) {
+        return clientService.getClientswithAgencyId(AgenceId);
+    }
 }

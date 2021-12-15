@@ -3,6 +3,7 @@ package eg.agencyservice.controllers;
 
 import eg.agencyservice.entities.Agency;
 import eg.agencyservice.service.AgencyService;
+import eg.agencyservice.valueObject.ResponseTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -38,7 +39,12 @@ public class AgencyController {
     }
 
     @PutMapping("/edit/{id}")
-    public Agency editAgency(@RequestBody Agency ag) {
-        return agencyService.updateAgence(ag);
+    public Agency editAgency(@PathVariable("id") long id, @RequestBody Agency ag) {
+        return agencyService.updateAgency(id, ag);
+    }
+
+    @GetMapping("/MyClients/{id}")
+    public ResponseTemplate getMyClient(@PathVariable("id") int AgenceId) {
+        return agencyService.getClientswithAgencyId(AgenceId);
     }
 }

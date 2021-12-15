@@ -17,6 +17,11 @@ public class ResponseTemplate {
         this.agency = agency;
     }
 
+
+    public ResponseTemplate(List<Client> client) {
+        this.client = client;
+    }
+
     public List<Client> getClient() {
         return client;
     }

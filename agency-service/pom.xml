@@ -52,4 +52,7 @@
             <version>3.1.0</version>
         </dependency>
     </dependencies>
+    <build>
+        <finalName>agency-service</finalName>
+    </build>
 </project>

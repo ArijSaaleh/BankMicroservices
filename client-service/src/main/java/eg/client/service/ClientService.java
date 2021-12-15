@@ -46,4 +46,19 @@ public class ClientService {
         vo.setAgency(agencyList);
         return vo;
     }
+
+    public ResponseTemplate getClientswithAgencyId(int AgencyId) {
+
+        List<Agency> agencyList = new ArrayList<>();
+        List<Client> clientList = clientRepo.findByagencyId(AgencyId);
+        Agency agency = restTemplate.getForObject("http://localhost:8762/serviceAgency/agency/" + AgencyId, Agency.class);
+        agencyList.add(agency);
+        ResponseTemplate v = new ResponseTemplate(clientList);
+        v.setClient(clientList);
+        return v;
+    }
+
+    public Client getClientById(Long id) {
+        return this.clientRepo.findById(id).get();
+    }
 }

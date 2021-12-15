@@ -13,6 +13,10 @@
         <module>eureka-server</module>
         <module>zuul-gateway</module>
         <module>client-service</module>
+        <module>config-server</module>
+        <module>employe-service</module>
+        <module>compte-service</module>
+        <module>credit-service</module>
     </modules>
     <name>microservices</name>
     <properties>

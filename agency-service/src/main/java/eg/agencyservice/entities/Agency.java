@@ -13,19 +13,12 @@ public class Agency implements Serializable {
     private String nom_agence;
     private String adr_agence;
 
-    public Agency(Long id, String nom_agence, String adr_agence) {
-        this.id = id;
-        this.nom_agence = nom_agence;
-        this.adr_agence = adr_agence;
+    public Agency() {
     }
 
     public Agency(String nom_agence, String adr_agence) {
         this.nom_agence = nom_agence;
         this.adr_agence = adr_agence;
-    }
-
-    public Agency() {
-
     }
 
     public Long getId() {

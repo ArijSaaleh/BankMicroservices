@@ -7,14 +7,19 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="config-server" />
+        <module name="employe-service" />
         <module name="zuul-gateway" />
+        <module name="credit-service" />
         <module name="eureka-server" />
         <module name="agency-service" />
+        <module name="compte-service" />
         <module name="client-service" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="agence-service" target="8" />
+      <module name="config-server-repo" target="8" />
       <module name="zuul-api-gateway" target="8" />
     </bytecodeTargetLevel>
   </component>

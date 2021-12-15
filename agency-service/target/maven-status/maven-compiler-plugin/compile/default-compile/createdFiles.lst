@@ -1,5 +1,7 @@
 eg\agencyservice\controllers\AgencyController.class
+eg\agencyservice\valueObject\Client.class
+eg\agencyservice\valueObject\ResponseTemplate.class
+eg\agencyservice\entities\Agency.class
 eg\agencyservice\repository\AgencyRepo.class
 eg\agencyservice\service\AgencyService.class
 eg\agencyservice\AgencyApplication.class
-eg\agencyservice\entities\Agency.class
