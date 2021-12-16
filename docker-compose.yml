@@ -1,23 +1,111 @@
+version: "3.9"
 services:
-  mysql:
-    image: mysql:5.7
-    container_name: mysql
+  #service 1: definition of mysql database
+  db:
+    image: mysql:latest
+    container_name: mysqlD
     environment:
-      MYSQL_USER: user
-      MYSQL_PASSWORD: user
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: agence_db
+      - MYSQL_ROOT_PASSWORD=root
     ports:
-      - "3306"
-  phpmyadmin:
-    image: phpmyadmin/phpmyadmin
-    container_name: pma
-    links:
-      - mysql
-    environment:
-      PMA_HOST: mysql
-      PMA_PORT: 3306
-      PMA_ARBITRARY: 1
+      - "3306:3306"
     restart: always
+
+  #service 2: definition of phpMyAdmin
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: my-php-myadmin
     ports:
-      - "8081:80"
+      - "8082:80"
+    restart: always
+
+    depends_on:
+      - db
+    environment:
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+  #service3 : definition Eureka
+  Eureka:
+    container_name: eureka
+    build: ../microservices/eureka-server
+    ports:
+      - "8761:8761"
+    image: "eureka-service-image"
+  #service4: definition agence
+  agence:
+    build: ../microservices/agency-service
+    ports:
+      - "8084:8084"
+    image: "agence-service-image"
+    depends_on:
+      - db
+      - Eureka
+      - client
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysqlD:3306/test?createDatabaseIfNotExist=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+  #service5: Compte
+  compte:
+    build: ../microservices/compte-service
+    ports:
+      - "8387:8387"
+    image: "compte-service-image"
+    depends_on:
+      - Eureka
+    environment:
+      - JAVA_OPTS=
+        - DEUREKA_SERVER=http://Eureka:8761/eureka
+    #service6 : definition service credit
+  credit:
+    build: ../microservices/credit-service
+    ports:
+      - "8183:8183"
+    image: "credit-service-image"
+    depends_on:
+      - client
+      - Eureka
+    environment:
+      - JAVA_OPTS=
+        - DEUREKA_SERVER=http://Eureka:8761/eureka
+    #service7: definition service client
+  client:
+    build: ../microservices/client-service
+    ports:
+      - "8586:8586"
+    image: "client-service-image"
+    depends_on:
+      - Eureka
+    environment:
+      - JAVA_OPTS=
+        - DEUREKA_SERVER=http://Eureka:8761/eureka
+  #service8 : definition service employe
+  employe:
+    build: ../microservices/employe-service
+    ports:
+      - "8587:8587"
+    image: "employe-service-image"
+    depends_on:
+      - db
+      - Eureka
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysqlD:3306/test?createDatabaseIfNotExist=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+  #service 9 : Config
+  configserver:
+    build: ../microservices/config-server
+    ports:
+      - "8888:8888"
+    hostname: configserver
+    image: "config-service-image"
+    depends_on:
+      - Eureka
+  #service 10 : Zuul Gateway
+  zuulGateway:
+    build: ../microservices/zuul-gateway
+    ports:
+      - "8763:8763"
+    hostname: zuulgateway
+    image: "zuul-server-image"
+    depends_on:
+      - Eureka

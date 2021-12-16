@@ -40,7 +40,7 @@ public class ClientService {
         ResponseTemplate vo = new ResponseTemplate();
         List<Agency> agencyList = new ArrayList<>();
         List<Client> clientList = clientRepo.findByagencyId(AgencyId);
-        Agency agency = restTemplate.getForObject("http://localhost:8762/serviceAgency/agency/" + AgencyId, Agency.class);
+        Agency agency = restTemplate.getForObject("http://localhost:8084/agency/" + AgencyId, Agency.class);
         agencyList.add(agency);
         vo.setClient(clientList);
         vo.setAgency(agencyList);
@@ -51,7 +51,7 @@ public class ClientService {
 
         List<Agency> agencyList = new ArrayList<>();
         List<Client> clientList = clientRepo.findByagencyId(AgencyId);
-        Agency agency = restTemplate.getForObject("http://localhost:8762/serviceAgency/agency/" + AgencyId, Agency.class);
+        Agency agency = restTemplate.getForObject("http://localhost:8084/agency/" + AgencyId, Agency.class);
         agencyList.add(agency);
         ResponseTemplate v = new ResponseTemplate(clientList);
         v.setClient(clientList);

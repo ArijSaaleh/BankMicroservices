@@ -1,1 +1,6 @@
+eg\zuulgateway\filtres\RouteFilter.class
+eg\zuulgateway\FeignConfig.class
+eg\zuulgateway\filtres\PreFilter.class
+eg\zuulgateway\filtres\PostFilter.class
+eg\zuulgateway\filtres\ErrorFilter.class
 eg\zuulgateway\ZuulGatewayApplication.class

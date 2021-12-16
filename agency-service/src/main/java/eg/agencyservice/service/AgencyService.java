@@ -50,7 +50,7 @@ public class AgencyService {
         List<Agency> agencyList = new ArrayList<>();
         List<Client> clientList = new ArrayList<>();
         Agency agency = agencyRepo.findById(Long.valueOf(AgencyId)).get();
-        Client client = restTemplate.getForObject("http://localhost:8762/serviceClient/getClients/" + AgencyId, Client.class);
+        Client client = restTemplate.getForObject("http://localhost:8586/getClients/" + AgencyId, Client.class);
         clientList.add(client);
         agencyList.add(agency);
         vo.setAgency(agencyList);

@@ -64,7 +64,7 @@ public class CreditController {
 		/*jsonObject.put("message-2", restTemplate.exchange(
 				"http://localhost:8087/clients/"+al.get(j), HttpMethod.GET,null,Object.class).getBody());*/
             ls.add(restTemplate.exchange(
-                    "http://localhost:8080/client/" + al.get(j), HttpMethod.GET, null, Object.class).getBody());
+                    "http://localhost:8586/client/" + al.get(j), HttpMethod.GET, null, Object.class).getBody());
 
         }
         return Arrays.asList(ls);
